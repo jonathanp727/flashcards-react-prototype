@@ -14,3 +14,24 @@ export function lookup(query) {
     return response.json();
   });
 }
+
+export function increment(word) {
+  console.log(word);
+  return fetch(`/api/word/`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      userId: window.USER_ID,
+      wordId: word._id,
+      wordJlpt: word.jlpt, 
+    }),
+  }).then((response) => {
+    if (response.status >= 400) {
+      throw new Error(response);
+    }
+    return response.json();
+  });
+}

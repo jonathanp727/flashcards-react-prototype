@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 
-import { lookup } from 'services/dict';
+import { lookup, increment } from 'services/dict';
 import styles from './styles.scss';
 
 const Word = ({ word }) => {
-
+  console.log(word);
   return (
     <li>
+      <button onClick={ () => increment(word) }></button>
+      <span>{word._id}</span>
+      <span>{word.jlpt ? ` n${word.jlpt.level} ` : ' '}</span>
       <span>{word.k_ele.keb}</span>
       <span>{word.r_ele.reb}</span>
       {word.sense.gloss.map ?
         word.sense.gloss.map((gloss) => (
-          <span>{gloss._t}</span>
+          <span key={gloss._t}>{gloss._t}</span>
         )) : 
         <span>{word.sense.gloss._t}</span>
       }
@@ -45,7 +48,7 @@ const Dict = (props) => {
       ) : (
         <ul>
           {words.map(word => (
-            <Word word={word} />
+            <Word word={word} key={word._id}/>
           ))}
         </ul>
       )}
