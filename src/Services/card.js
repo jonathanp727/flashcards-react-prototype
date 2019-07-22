@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch';
 
-export function lookup(query) {
-  return fetch(`/api/word/${query}`, {
+export function getUser(userId) {
+  return fetch(`/api/user/${userId}`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -15,8 +15,8 @@ export function lookup(query) {
   });
 }
 
-export function increment(word) {
-  return fetch(`/api/word/`, {
+export function doCard(wordId, wordJlpt, upcoming, quality) {
+  return fetch(`/api/card/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -24,8 +24,10 @@ export function increment(word) {
     },
     body: JSON.stringify({
       userId: window.USER_ID,
-      wordId: word._id,
-      wordJlpt: word.jlpt, 
+      wordId: wordId,
+      wordJlpt: wordJlpt,
+      upcoming,
+      response: quality,
     }),
   }).then((response) => {
     if (response.status >= 400) {

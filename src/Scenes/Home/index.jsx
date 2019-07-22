@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import history from 'services/history';
 
@@ -18,7 +19,7 @@ const Home = () => {
         <input value={query} onChange={e => setQuery(e.target.value)} />
         <button onClick={(e) => handleLookup(e, query)} />
       </form>
-
+      <Link to="/cards">Do Cards</Link>
     </div>
   );
 }

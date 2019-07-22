@@ -6,7 +6,7 @@ import { Router } from 'react-router-dom';
 import history from 'services/history';
 
 // Hacky way to store USER_ID
-window.USER_ID = '5d262b16cb7288941fb85608';
+window.USER_ID = '5d362b35089af3db37bbaa03';
 
 ReactDOM.render(
   <Router history={history}>
