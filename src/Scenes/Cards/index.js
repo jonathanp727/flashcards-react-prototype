@@ -6,6 +6,7 @@ import { isSameDay } from 'lib/dateLogic';
 
 const Card = ({ user, onDoCard, redoQueue }) => {
   console.log('Card()');
+  console.log(user);
 
   let cur;
   let finished = false;
@@ -14,6 +15,7 @@ const Card = ({ user, onDoCard, redoQueue }) => {
   if (user.upcoming.length > 0) {
     cur = user.upcoming[0];
     upcoming = true;
+
   } else {
     cur = user.cards[0];
     if (!isSameDay(new Date(user.words[cur].card.date), new Date())) {
@@ -26,6 +28,8 @@ const Card = ({ user, onDoCard, redoQueue }) => {
     }
   }
   const word = user.words[cur];
+  console.log(word);
+  console.log(word.entry.jlpt);
 
   const onClick = (quality) => {
     if (!isRedo) {
@@ -42,9 +46,11 @@ const Card = ({ user, onDoCard, redoQueue }) => {
     }
   }
 
+  const display = word.entry.k_ele ? (Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb) : (Array.isArray(word.entry.r_ele) ? word.entry.r_ele[0].reb : word.entry.r_ele.reb);
+
   return finished ? <span>Done for today!</span> : (
     <div>
-      <span>{Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb}</span>
+      <span>{display}</span>
       <button onClick={() => onClick(1)}>1</button>
       <button onClick={() => onClick(2)}>2</button>
       <button onClick={() => onClick(3)}>3</button>
