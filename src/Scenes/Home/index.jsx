@@ -12,6 +12,7 @@ function handleLookup(e, query) {
 
 const Home = () => {
   const [query, setQuery] = useState('');
+  console.log('Home()');
 
   return (
     <div className="home">
