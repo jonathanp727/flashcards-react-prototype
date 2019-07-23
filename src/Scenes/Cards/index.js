@@ -13,11 +13,12 @@ const Card = ({ user, onDoCard }) => {
     upcoming = true;
   } else {
     cur = user.cards[0];
-    if (!isSameDay(new Date(cur.date), new Date())) {
+    if (!isSameDay(new Date(user.words[cur].card.date), new Date())) {
       finished = true;
     }
   }
   const word = user.words[cur];
+  console.log(word)
   return finished ? <span>Done for today!</span> : (
     <div>
       <span>{Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb}</span>
