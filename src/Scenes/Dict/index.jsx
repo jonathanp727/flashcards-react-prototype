@@ -5,19 +5,27 @@ import styles from './styles.scss';
 
 const Word = ({ word }) => {
   console.log(word);
+  let gloss;
+  if (word.sense[0]) {
+    gloss = word.sense[0].gloss;
+  } else {
+    gloss = word.sense.gloss;
+  }
   return (
     <li>
       <button onClick={ () => increment(word) }></button>
       <span>{word._id}</span>
       <span>{word.jlpt ? ` n${word.jlpt.level} ` : ' '}</span>
-      <span>{word.k_ele.keb}</span>
-      <span>{word.r_ele.reb}</span>
-      {word.sense.gloss.map ?
-        word.sense.gloss.map((gloss) => (
-          <span key={gloss._t}>{gloss._t}</span>
-        )) : 
-        <span>{word.sense.gloss._t}</span>
-      }
+      <span>{word.k_ele ? word.k_ele.keb : null}</span>
+      <span>{word.r_ele ? word.r_ele.reb : null}</span>
+      <ul style={{  }}>
+        {gloss.map ?
+          gloss.map((g) => (
+            <li key={g._t}>{g._t}</li>
+          )) : 
+          <li>{gloss._t}</li>
+        }
+      </ul>
     </li>
   );
 }
