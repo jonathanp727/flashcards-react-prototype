@@ -46,18 +46,42 @@ const Card = ({ user, onDoCard, redoQueue }) => {
     }
   }
 
-  const display = word.entry.k_ele ? (Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb) : (Array.isArray(word.entry.r_ele) ? word.entry.r_ele[0].reb : word.entry.r_ele.reb);
+  const front = word.entry.k_ele ? (Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb) : (Array.isArray(word.entry.r_ele) ? word.entry.r_ele[0].reb : word.entry.r_ele.reb);
+  const back = Array.isArray(word.entry.sense[0].gloss) ? word.entry.sense[0].gloss : [word.entry.sense[0].gloss];
 
   return finished ? <span>Done for today!</span> : (
     <div>
-      <span>{display}</span>
-      <button onClick={() => onClick(1)}>1</button>
-      <button onClick={() => onClick(2)}>2</button>
-      <button onClick={() => onClick(3)}>3</button>
-      <button onClick={() => onClick(4)}>4</button>
-      <button onClick={() => onClick(5)}>5</button>
+      <Cardcard front={front} back={back} onClick={onClick} /> 
     </div>
   )
+}
+
+const Cardcard = ({ front, back, onClick }) => {
+  const [isFlipped, flip] = useState(false);
+
+  if (isFlipped) {
+    return (
+      <div>
+        <span>{front}</span>
+        {
+          back.map((el) => {
+            return <span key={el._t}>{el._t}</span>
+          })
+        }
+        <button onClick={() => onClick(1)}>1</button>
+        <button onClick={() => onClick(2)}>2</button>
+        <button onClick={() => onClick(3)}>3</button>
+        <button onClick={() => onClick(4)}>4</button>
+        <button onClick={() => onClick(5)}>5</button>
+      </div>
+    );
+  } else {
+    return (
+      <div onClick={() => flip(true)}>
+        <span>{front}</span>
+      </div>
+    );
+  }
 }
 
 const Cards = () => {
