@@ -5,8 +5,7 @@ import { getUser, doCard } from 'services/card';
 import { isSameDay } from 'lib/dateLogic';
 
 const Card = ({ user, onDoCard, redoQueue }) => {
-  console.log('Card()');
-  console.log(user);
+  console.log('user', user);
 
   let cur;
   let finished = false;
@@ -28,8 +27,7 @@ const Card = ({ user, onDoCard, redoQueue }) => {
     }
   }
   const word = user.words[cur];
-  console.log(word);
-  console.log(word.entry.jlpt);
+  console.log('cur word', word);
 
   const onClick = (quality) => {
     if (!isRedo) {
@@ -44,6 +42,10 @@ const Card = ({ user, onDoCard, redoQueue }) => {
     } else {
       onDoCard(null, null);
     }
+  }
+
+  if (!Array.isArray(word.entry.sense)) {
+    word.entry.sense[0] = word.entry.sense;
   }
 
   const front = word.entry.k_ele ? (Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb) : (Array.isArray(word.entry.r_ele) ? word.entry.r_ele[0].reb : word.entry.r_ele.reb);
@@ -85,10 +87,8 @@ const Cardcard = ({ front, back, onClick }) => {
 }
 
 const Cards = () => {
-  console.log('Cards()');
   const [data, setData] = useState({ isLoading: true, user: null, needsUpdate: true, redoQueue: [] });
   // Flip the needsUpdate value every time to trigger api update
-  console.log(data.redoQueue);
 
   // Reload user on every render for easy updating
   useEffect(() => {
