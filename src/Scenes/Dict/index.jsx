@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import Entry from 'components/Entry';
 import { lookup, increment } from 'services/dict';
 import styles from './styles.scss';
 
@@ -56,7 +57,10 @@ const Dict = (props) => {
       ) : (
         <ul>
           {words.map(word => (
-            <Word word={word} key={word._id}/>
+            <li>
+              <button style={{display: 'inline'}} onClick={ () => increment(word) }></button>
+              <Entry entry={word} key={word._id} />
+            </li>
           ))}
         </ul>
       )}

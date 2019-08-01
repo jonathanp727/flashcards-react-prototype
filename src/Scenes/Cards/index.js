@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles.scss';
 
+import Entry from 'components/Entry';
 import { getUser, doCard } from 'services/card';
 import { isSameDay } from 'lib/dateLogic';
 
@@ -49,27 +50,21 @@ const Card = ({ user, onDoCard, redoQueue }) => {
   }
 
   const front = word.entry.k_ele ? (Array.isArray(word.entry.k_ele) ? word.entry.k_ele[0].keb : word.entry.k_ele.keb) : (Array.isArray(word.entry.r_ele) ? word.entry.r_ele[0].reb : word.entry.r_ele.reb);
-  const back = Array.isArray(word.entry.sense[0].gloss) ? word.entry.sense[0].gloss : [word.entry.sense[0].gloss];
 
   return finished ? <span>Done for today!</span> : (
     <div>
-      <Cardcard front={front} back={back} onClick={onClick} /> 
+      <Cardcard front={front} entry={word.entry} onClick={onClick} /> 
     </div>
   )
 }
 
-const Cardcard = ({ front, back, onClick }) => {
+const Cardcard = ({ front, entry, onClick }) => {
   const [isFlipped, flip] = useState(false);
 
   if (isFlipped) {
     return (
       <div>
-        <span>{front}</span>
-        {
-          back.map((el) => {
-            return <span key={el._t}>{el._t}</span>
-          })
-        }
+        <Entry entry={entry} />
         <button onClick={() => onClick(1)}>1</button>
         <button onClick={() => onClick(2)}>2</button>
         <button onClick={() => onClick(3)}>3</button>
