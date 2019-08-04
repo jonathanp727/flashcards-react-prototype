@@ -25,12 +25,12 @@ const Entry = ({ entry }) => {
       <p>{entry._id}</p>
       <p>Kanji: 
         {
-          entry.k_ele.map((k) => ` ${k.keb}`)
+          entry.k_ele[0] ? entry.k_ele.map((k) => ` ${k.keb}`) : null
         }
       </p>
       <p>Reading: 
         {
-          entry.r_ele.map((r) => ` ${r.reb}`)
+          entry.r_ele[0] ? entry.r_ele.map((r) => ` ${r.reb}`) : null
         }
       </p>
       <div>
