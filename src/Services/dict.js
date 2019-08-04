@@ -15,7 +15,7 @@ export function lookup(query) {
   });
 }
 
-export function increment(word) {
+export function increment(word, kindaKnew) {
   return fetch(`/api/word/`, {
     method: 'POST',
     headers: {
@@ -26,6 +26,7 @@ export function increment(word) {
       userId: window.USER_ID,
       wordId: word._id,
       wordJlpt: word.jlpt, 
+      kindaKnew,
     }),
   }).then((response) => {
     if (response.status >= 400) {

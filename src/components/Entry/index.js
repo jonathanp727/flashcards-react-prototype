@@ -47,6 +47,7 @@ const Entry = ({ entry }) => {
           }
         </ol>
       </div>
+      <p>JLPT: {`n${entry.jlpt ? entry.jlpt.level : 0}`}</p>
     </div>
   );
 }

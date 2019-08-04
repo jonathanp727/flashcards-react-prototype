@@ -14,7 +14,8 @@ const Word = ({ word }) => {
   }
   return (
     <li>
-      <button onClick={ () => increment(word) }></button>
+      <button onClick={ () => increment(word, false) }>Didn't know</button>
+      <button onClick={ () => increment(word, true) }>Kinda knew</button>
       <span>{word._id}</span>
       <span>{word.jlpt ? ` n${word.jlpt.level} ` : ' '}</span>
       <span>{word.k_ele ? word.k_ele.keb : null}</span>
@@ -57,9 +58,10 @@ const Dict = (props) => {
       ) : (
         <ul>
           {words.map(word => (
-            <li>
-              <button style={{display: 'inline'}} onClick={ () => increment(word) }></button>
-              <Entry entry={word} key={word._id} />
+            <li key={word._id}>
+              <button style={{display: 'inline'}} onClick={ () => increment(word, false) }>Didn't know</button>
+              <button style={{display: 'inline'}} onClick={ () => increment(word, true) }>Kinda knew</button>
+              <Entry entry={word} />
             </li>
           ))}
         </ul>
